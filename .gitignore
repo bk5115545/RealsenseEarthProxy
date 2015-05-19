@@ -1,0 +1,5 @@
+*.filters
+bin/
+Debug/
+Release/
+*.suo
