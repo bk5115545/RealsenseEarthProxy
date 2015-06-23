@@ -51,14 +51,19 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Dev\Intel_RealSense\RSSDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Dev\Intel_RealSense\RSSDK\include;D:\Dev\SFML-2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName);D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName)\$(PlatformToolset);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpxc.lib;libpxcmd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName);D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName)\$(PlatformToolset);D:\Dev\SFML-2.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libpxc.lib;libpxcmd.lib;sfml-graphics.lib;sfml-system.lib;sfml-window.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkStatus>true</LinkStatus>
+      <ForceFileOutput>Enabled</ForceFileOutput>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -67,19 +72,28 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Dev\Intel_RealSense\RSSDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Dev\Intel_RealSense\RSSDK\include;D:\Dev\SFML-2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName);D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName)\$(PlatformToolset);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libpxc.lib;libpxcmd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName);D:\Dev\Intel_RealSense\RSSDK\lib\$(PlatformName)\$(PlatformToolset);D:\Dev\SFML-2.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libpxc.lib;libpxcmd.lib;sfml-graphics.lib;sfml-system.lib;sfml-window.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkStatus>true</LinkStatus>
+      <ForceFileOutput>Enabled</ForceFileOutput>
     </Link>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

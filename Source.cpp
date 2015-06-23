@@ -19,16 +19,16 @@ int main(char* args,char* argsc) {
 		return 10;
 	}
 
-	status = session->EnableHand();
+	status = session->EnableHand(nullptr);
 
-	if(status != PXC_STATUS_NO_ERROR) {
+	if(status = PXC_STATUS_NO_ERROR) {
 		printf("Hand data unavailable\n");
 		return 20;
 	}
 
 	session->Init();
 
-	if(status != PXC_STATUS_NO_ERROR) {
+	if(status = PXC_STATUS_NO_ERROR) {
 		printf("init failed\n");
 		return 30;
 	}
@@ -36,7 +36,7 @@ int main(char* args,char* argsc) {
 	PXCHandModule* handTracker = session->QueryHand();
 	
 
-	if(status != PXC_STATUS_NO_ERROR) {
+	if(status = PXC_STATUS_NO_ERROR) {
 		printf("no hand tracking support\n");
 		return 40;
 	}
@@ -48,10 +48,17 @@ int main(char* args,char* argsc) {
 	PXCHandData* handData = handTracker->CreateOutput();
 	bool running = true;
 
-	session->EnableStream(PXCCapture::StreamType::STREAM_TYPE_DEPTH,1280,768);
+	status = session->EnableStream(PXCCapture::StreamType::STREAM_TYPE_DEPTH,1920,1080,30.0);
+
+	if (status = PXC_STATUS_NO_ERROR) {
+		printf("Unknown error when enabling stream.");
+		return 50;
+	}
 
 	while(running) {
+		//printf("Acquire frame. ");
 		status = session->AcquireFrame(true);
+		//printf("Got frame.\n");
 		if(status >= PXC_STATUS_NO_ERROR) {
 			printf("He's dead Jim.\n");
 			return 50;
@@ -67,20 +74,21 @@ int main(char* args,char* argsc) {
 			wchar_t* name = (wchar_t*)gestureData.name;
 			std::wstring nameStr(name);
 			std::wcout << nameStr << std::endl;
+			
 			//printf("%s - len %d\n",nameStr.c_str(), nameStr.size());
 
-			if(nameStr == L"spreadfingers") {
-				//std::wcout << L"hurray, fingers" << std::endl;
+			if(nameStr == L"v_sign") {
+				running = false;
 			}
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+		PXCCapture::Sample* capture = session->QuerySample();
+		PXCImage* depthImage = capture->depth;
+
+		//std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 		session->ReleaseFrame();
 	}
-
-	handData->Release();
-	handConfig->Release();
-	handTracker->Release();
 
 	session->Release();
 
